@@ -1,56 +1,126 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { DELETE } from "../redux/actions/action";
+import { useNavigate } from "react-router-dom";
 
 const CardsDetails = () => {
+
+  const [data, setData] = useState([]);
+  // console.log(data);
+
+  const {id} = useParams()
+
+  const history = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const getdata = useSelector((state) => state.cartreducer.carts);
+  // console.log(getdata);
+
+
+  const compare = () => {
+    let comparedata = getdata.filter((e) => {
+      return e.id == id
+    });
+    // console.log(comparedata);
+    setData(comparedata)
+    }
+
+
+  useEffect(() => {
+      compare();
+   },[id])
+
+
+  const dlt = (id) => {
+    dispatch(DELETE(id));
+    history('/')
+  };
+
   return (
     <>
       <div className="container mt-2">
         <h2 className="text-center">Items Details Page</h2>
         <section className="container mt-3">
           <div className="itemsdetails">
-            <div className="items_img">
-              <img
-                src="https://b.zmtcdn.com/data/pictures/9/18857339/8f53919f1175c08cf0f0371b73704f9b_o2_featured_v2.jpg?output-format=webp"
-                alt=""
-              />
-            </div>
+            {
+              data.map((element) => {
+                return (
+                  <>
+                    <div className="items_img">
+                      <img src={element.imgdata} alt="" />
+                    </div>
 
-            <div className="details">
-              <Table>
-                <tr>
-                  <td>
-                    <p><strong>Restaurant</strong> : Masala</p>
-                    <p><strong>Price</strong> : ₹ 300</p>
-                    <p><strong>Dishes</strong> : Masala Theory</p>
-                    <p><strong>Total</strong> : ₹ 300</p>
-                  </td>
-                  <td>
-                    <p><strong>Rating :</strong><span
-                        style={{
-                          background: "green",
-                          color: "#fff",
-                          padding: "2px 5px",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        3.5 star
-                      </span></p>
-                    <p><strong>Order Review :</strong> 1175+ order placed from
-                      here recently
-                    </p>
-                    <p><strong>Remove : </strong>
-                      <i className="fas fa-trash"
-                        style={{
-                          color: "red",
-                          fontSize: 20,
-                          cursor: "pointer",
-                        }}
-                      ></i>
-                    </p>
-                  </td>
-                </tr>
-              </Table>
-            </div>
+                    <div className="details">
+                      <Table>
+                        <tr>
+                          <td>
+                            <p>
+                              <strong>Restaurant</strong> : {element.rname}
+                            </p>
+                            <p>
+                              <strong>Price</strong> : ₹ {element.price}
+                            </p>
+                            <p>
+                              <strong>Dishes</strong> : {element.address}
+                            </p>
+                            <p>
+                              <strong>Total</strong> : ₹ 300
+                            </p>
+                            <div
+                              className="mt-5 d-flex justify-content-between align-items-center"
+                              style={{
+                                width: 100,
+                                cursor: "pointer",
+                                background: "#ddd",
+                                color: "#111",
+                              }}
+                            >
+                              <span style={{ fontSize: 24 }}>-</span>
+                              <span style={{ fontSize: 22 }}>{element.qnty}</span>
+                              <span style={{ fontSize: 24 }}>+</span>
+                            </div>
+                          </td>
+                          <td>
+                            <p>
+                              <strong>Rating :</strong>
+                              <span
+                                style={{
+                                  background: "green",
+                                  color: "#fff",
+                                  padding: "2px 5px",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                {element.rating}
+                              </span>
+                            </p>
+                            <p>
+                              <strong>Order Review :</strong> {element.somedata}
+                            </p>
+                            <p>
+                              <strong>Remove : </strong>
+                              <i
+                                className="fas fa-trash"
+                                style={{
+                                  color: "red",
+                                  fontSize: 20,
+                                  cursor: "pointer",
+                                }}
+                                onClick={() => dlt(element.id)}
+                              ></i>
+                            </p>
+                          </td>
+                        </tr>
+                      </Table>
+                    </div>
+                  </>
+                );
+              })
+            }
+            
           </div>
         </section>
       </div>
