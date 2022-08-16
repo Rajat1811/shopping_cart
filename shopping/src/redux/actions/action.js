@@ -13,3 +13,11 @@ export const DELETE = (id) => {
         payload: id
     }
 }
+
+
+export const REMOVE = (item) => {
+    return{
+        type: "RMV_ONE",
+        payload: item
+    }
+}

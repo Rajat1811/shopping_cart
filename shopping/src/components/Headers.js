@@ -40,7 +40,7 @@ const Headers = () => {
   const total = () =>{
     let price = 0;
     getdata.map((el,k) => {
-      price = el.price + price
+      price = el.price * el.qnty + price
     });
     setPrice(price)
   };
@@ -55,17 +55,22 @@ const Headers = () => {
       <Navbar bg="dark" variant="dark" style={{ height: "60px" }}>
         <Container>
           <NavLink to="/" className="text-decoration-none text-light mx-3">
-            Navbar
+            Shopping Cart
           </NavLink>
           <Nav className="me-auto">
-            <NavLink
+            {/* <NavLink
               to="/home"
               className="text-decoration-none text-light mx-3"
             >
               Home
-            </NavLink>
-            <NavLink to="/login" className="text-decoration-none text-light">
-              Login
+            </NavLink> */}
+          </Nav>
+          <Nav>
+            <NavLink
+              to="/loginres"
+              className="text-decoration-none text-light mx-5"
+            >
+              Login/Regs
             </NavLink>
           </Nav>
           <Badge
