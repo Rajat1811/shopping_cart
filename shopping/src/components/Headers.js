@@ -67,7 +67,7 @@ const Headers = () => {
           </Nav>
           <Nav>
             <NavLink
-              to="/loginres"
+              to="/login"
               className="text-decoration-none text-light mx-5"
             >
               Login/Regs
