@@ -2,7 +2,6 @@ import { TextField, Button, Box, Alert } from '@mui/material';
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import React from 'react'
-// import SendPasswordResetEmail from './SendPasswordResetEmail';
 
 const Login = () => {
 
@@ -43,7 +42,6 @@ const Login = () => {
         <Box textAlign='center'>
             <Button type='submit' variant='contained' sx={{mt:3, mb:2, px:5}}>Login</Button>
         </Box>
-        {/* <NavLink to='/sendpasswordresetemail'>Forget password ?</NavLink> */}
         {error.status ? <Alert severity={error.type} sx={{ mt: 3 }}>{error.msg}</Alert> : ''}
     </Box>
    </>

@@ -2,7 +2,7 @@ import { TextField, FormControlLabel, Checkbox, Button, Box, Alert } from '@mui/
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import React from 'react'
-import { Login } from '@mui/icons-material';
+import Login from './Login';
 
 
 
